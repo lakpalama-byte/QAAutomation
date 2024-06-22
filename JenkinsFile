@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MAVEN_HOME = tool 'Maven' // Ensure Maven is installed and configured in Jenkins global tool configuration
+        MAVEN_HOME = C:\Program Files\apache-maven-3.9.8
     }
 
     stages {
