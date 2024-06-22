@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        MAVEN_HOME = tool 'Maven' // Ensure Maven is installed and configured in Jenkins global tool configuration
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git
+                git 'https://github.com/lakpalama-byte/QAAutomation.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the project using Maven
+                sh "${MAVEN_HOME}/bin/mvn clean compile"
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run the tests using Maven
+                sh "${MAVEN_HOME}/bin/mvn test"
+            }
+        }
+
+        stage('Generate Reports') {
+            steps {
+                // Generate Cucumber reports
+                cucumber 'target/cucumber-reports/*.json'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive test results
+            junit 'target/surefire-reports/*.xml'
+            cucumber 'target/cucumber-reports/*.json'
+        }
+    }
+}
