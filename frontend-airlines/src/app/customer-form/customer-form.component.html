@@ -1,0 +1,19 @@
+
+
+
+
+
+<!-- src/app/customer-form/customer-form.component.html -->
+<h2>{{ isEdit ? 'Edit' : 'Add' }} Customer</h2>
+<form (ngSubmit)="saveCustomer()">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" [(ngModel)]="customer.name" name="name" required>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" [(ngModel)]="customer.email" name="email" required>
+  </div>
+  <button type="submit">{{ isEdit ? 'Update' : 'Add' }} Customer</button>
+  <button type="button" (click)="router.navigate(['/customers'])">Cancel</button>
+</form>

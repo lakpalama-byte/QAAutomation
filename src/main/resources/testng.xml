@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CustomTestSuite">
+    <test name="CustomerApiTests">
+        <classes>
+            <class name="com.ourairlines.airlines.BackendAPiTest"/>
+            <!-- Add more test classes as needed -->
+        </classes>
+    </test>
+</suite>
