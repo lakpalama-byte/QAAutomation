@@ -22,7 +22,7 @@ public class BackendAPiTest {
 
     public void setUp()   {
 
-        RestAssured.baseURI="http://localhost:8080";
+        RestAssured.baseURI="http://localhost:8081";
 
 
 
