@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the project using Maven
-                sh "${MAVEN_HOME}/bin/mvn clean compile"
+                sh ''' ${MAVEN_HOME}/bin/mvn clean compile '''
             }
         }
 
@@ -27,22 +27,20 @@ pipeline {
             }
         }
 
-        /*   stage('Generate Reports') {
+           stage('Generate Reports') {
             steps {
                 // Generate Cucumber reports
                 cucumber 'target/cucumber-reports/*.json'
             }
-        }   */
+        }
     }
 
-
-
-//     post {
-//         always {
-//             // Archive test results
-//             junit 'target/surefire-reports/*.xml'
-//             cucumber 'target/cucumber-reports/*.json'
-//         }
-//     }
+     post {
+         always {
+             // Archive test results
+             junit 'target/surefire-reports/*.xml'
+             cucumber 'target/cucumber-reports/*.json'
+         }
+     }
 
 }
