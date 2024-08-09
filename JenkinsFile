@@ -27,19 +27,20 @@ pipeline {
             }
         }
 
-        stage('Generate Reports') {
+        /*   stage('Generate Reports') {
             steps {
                 // Generate Cucumber reports
                 cucumber 'target/cucumber-reports/*.json'
             }
-        }
+        }   */
     }
 
-    post {
-        always {
-            // Archive test results
-            junit 'target/surefire-reports/*.xml'
-            cucumber 'target/cucumber-reports/*.json'
-        }
-    }
+//     post {
+//         always {
+//             // Archive test results
+//             junit 'target/surefire-reports/*.xml'
+//             cucumber 'target/cucumber-reports/*.json'
+//         }
+//     }
+
 }
