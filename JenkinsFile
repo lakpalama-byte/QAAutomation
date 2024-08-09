@@ -8,8 +8,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from Git
-                git 'https://github.com/lakpalama-byte/QAAutomation.git'
+                checkout ([
+                $class: 'GitSCM',
+                userRemoteConfigs: [[ url: 'https://github.com/lakpalama-byte/QAAutomation.git']] ,
+                branches: [[ name: '*dev']]
+
+                ])
+                
             }
         }
 
