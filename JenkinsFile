@@ -14,21 +14,21 @@ pipeline {
                 branches: [[ name: '*dev']]
 
                 ])
-                
+
             }
         }
 
         stage('Build') {
             steps {
                 // Build the project using Maven
-                sh ''' ${MAVEN_HOME}/bin/mvn clean compile '''
+                sh '''${MAVEN_HOME}/bin/mvn clean install'''
             }
         }
 
         stage('Run Tests') {
             steps {
                 // Run the tests using Maven
-                sh "${MAVEN_HOME}/bin/mvn test"
+                sh '''${MAVEN_HOME}/bin/mvn test'''
             }
         }
 
