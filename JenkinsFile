@@ -6,6 +6,16 @@ pipeline {
     }
 
     stages {
+
+
+        stage('SSH to EC2')  {
+        steps {
+         sshCommand remote: [host: '3.236.134.199', user: 'ec2-user', identityFile: 'C:\Users\sapan\OneDrive\Desktop\TECH_LEARN_24\DevOps\Credential_mgmt.ssh/auth_key.pem'], command: 'echo "Hello EC2"']
+        }
+        }
+
+
+
         stage('Checkout') {
             steps {
                 checkout ([
