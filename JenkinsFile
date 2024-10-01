@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     environment {
-        MAVEN_HOME = '/opt/homebrew/Cellar/maven/3.9.8/libexec'
+        M2_HOME = '/opt/Maven'  // Remove space here
+        PATH = "${M2_HOME}/bin:${env.PATH}"
     }
+
 
     stages {
 
@@ -15,7 +17,7 @@ pipeline {
                 checkout ([
                 $class: 'GitSCM',
                 userRemoteConfigs: [[ url: 'https://github.com/lakpalama-byte/QAAutomation.git']] ,
-                branches: [[ name: '*dev']]
+                branches: [[ name: 'dev']]
 
                 ])
 
@@ -25,14 +27,14 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the project using Maven
-                sh '''${MAVEN_HOME}/bin/mvn clean install'''
+                sh '''${M2_HOME}/bin/mvn clean package'''
             }
         }
 
         stage('Run Tests') {
             steps {
                 // Run the tests using Maven
-                sh '''${MAVEN_HOME}/bin/mvn test'''
+                sh '''${M2_HOME}/bin/mvn test'''
             }
         }
 
