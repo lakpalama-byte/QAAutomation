@@ -1,10 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        M2_HOME = '/opt/Maven'  // Remove space here
-        PATH = "${M2_HOME}/bin:${env.PATH}"
-    }
+   environment {
+           JAVA_HOME = "/opt/homebrew/Cellar/openjdk/22.0.2/libexec/openjdk.jdk/Contents/Home"
+           M2_HOME = "/opt/homebrew/Cellar/maven/3.9.8/libexec"
+           PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
+       }
 
 
     stages {
@@ -25,18 +26,27 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                // Build the project using Maven
-                sh '''${M2_HOME}/bin/mvn clean package'''
-            }
+            // Run Maven clean and package commands
+                            sh '''
+                            ${M2_HOME}/bin/mvn clean package
+                            '''
         }
 
         stage('Run Tests') {
             steps {
-                // Run the tests using Maven
-                sh '''${M2_HOME}/bin/mvn test'''
-            }
+                            // Run Maven tests
+                            sh '''
+                            ${M2_HOME}/bin/mvn test
+                            '''
+                        }
         }
+
+        stage('Archive Artifacts') {
+                    steps {
+                        // Archive the generated JAR file
+                        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                    }
+                }
 
            stage('Generate Reports') {
             steps {
@@ -44,6 +54,9 @@ pipeline {
                 cucumber 'target/cucumber-reports/*.json'
             }
         }
+
+
+
     }
 
      post {
