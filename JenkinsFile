@@ -6,6 +6,7 @@ pipeline {
            MAVEN_HOME = '/opt/homebrew/Cellar/maven/3.9.8/libexec'
            // Update the PATH to include Maven and Java
            JAVA_HOME = '/opt/homebrew/Cellar/openjdk/22.0.2/libexec/openjdk.jdk/Contents/Home'
+           DB_CREDENTIALS = credentials('db-credentials')
            PATH = "${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
        }
 
