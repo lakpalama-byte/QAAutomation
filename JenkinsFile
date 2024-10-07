@@ -1,73 +1,58 @@
 pipeline {
     agent any
 
-    environment {
-           // Define Maven Home here
-           MAVEN_HOME = '/opt/homebrew/opt/maven'
-           // Update the PATH to include Maven and Java
-           JAVA_HOME = '/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home'
-            PATH = "${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
-       }
+    tools {
+        // Reference the Maven installation by name
+        maven 'MyMaven' // Replace with your configured Maven name
+        // Reference the JDK installation by name
+        jdk 'MyJava22' // Replace with your configured JDK name
+    }
 
     stages {
-
-
-
-
         stage('Checkout') {
             steps {
-                checkout ([
-                $class: 'GitSCM',
-                userRemoteConfigs: [[ url: 'https://github.com/lakpalama-byte/QAAutomation.git']] ,
-                branches: [[ name: 'dev']]
-
+                checkout([
+                    $class: 'GitSCM',
+                    userRemoteConfigs: [[url: 'https://github.com/lakpalama-byte/QAAutomation.git']],
+                    branches: [[name: 'dev']]
                 ])
-
             }
         }
 
         stage('Build') {
-             steps {
-                            // Use Maven to clean and package the project
-                            sh '''
-                            ${MAVEN_HOME}/bin/mvn clean package
-                            '''
-                        }
+            steps {
+                // Use Maven to clean and package the project
+                sh 'mvn clean package'
+            }
         }
 
         stage('Run Tests') {
             steps {
-                            // Run Maven tests
-                            sh '''
-                            ${MAVEN_HOME}/bin/mvn test
-                            '''
-                        }
+                // Run Maven tests
+                sh 'mvn test'
+            }
         }
 
         stage('Archive Artifacts') {
-                    steps {
-                        // Archive the generated JAR file
-                        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-                    }
-                }
+            steps {
+                // Archive the generated JAR file
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
 
-           stage('Generate Reports') {
+        stage('Generate Reports') {
             steps {
                 // Generate Cucumber reports
                 cucumber 'target/cucumber-reports/*.json'
             }
         }
-
-
-
     }
 
-     post {
-         always {
-             // Archive test results
-             junit 'target/surefire-reports/*.xml'
-             cucumber 'target/cucumber-reports/*.json'
-         }
-     }
-
+    post {
+        always {
+            // Archive test results
+            junit 'target/surefire-reports/*.xml'
+            cucumber 'target/cucumber-reports/*.json'
+        }
+    }
 }
