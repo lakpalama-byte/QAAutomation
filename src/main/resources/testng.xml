@@ -2,7 +2,7 @@
 <suite name="CustomTestSuite">
     <test name="CustomerApiTests">
         <classes>
-            <class name="com.ourairlines.airlines.BackendAPiTest"/>
+            <class name="com.schoolmgmt.school.BackendAPiTest"/>
             <!-- Add more test classes as needed -->
         </classes>
     </test>

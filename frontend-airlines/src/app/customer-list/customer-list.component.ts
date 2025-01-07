@@ -1,12 +1,12 @@
-// src/app/customer-list/customer-list.component.ts
+// src/app/student-list/student-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
-import { Customer } from '../customer';
+import { CustomerService } from '../student.service';
+import { Customer } from '../student';
 
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  selector: 'app-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];

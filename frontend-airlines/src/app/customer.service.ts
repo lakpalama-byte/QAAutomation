@@ -1,8 +1,8 @@
-// src/app/customer.service.ts
+// src/app/student.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from './customer';
+import { Customer } from './student';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class CustomerService {
     return this.http.get<Customer>(`${this.apiUrl}/${id}`);
   }
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.apiUrl, customer);
+  createCustomer(student: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.apiUrl, student);
   }
 
-  updateCustomer(customer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`${this.apiUrl}/${customer.id}`, customer);
+  updateCustomer(student: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${this.apiUrl}/${student.id}`, student);
   }
 
   deleteCustomer(id: number): Observable<void> {

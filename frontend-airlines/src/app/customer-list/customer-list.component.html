@@ -1,4 +1,4 @@
-<!-- src/app/customer-list/customer-list.component.html -->
+<!-- src/app/student-list/student-list.component.html -->
 <h2>Customer List</h2>
 <table>
   <thead>
@@ -10,13 +10,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let customer of customers">
-    <td>{{ customer.id }}</td>
-    <td>{{ customer.name }}</td>
-    <td>{{ customer.email }}</td>
+  <tr *ngFor="let student of customers">
+    <td>{{ student.id }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ student.email }}</td>
     <td>
-      <button [routerLink]="['/edit', customer.id]">Edit</button>
-      <button (click)="deleteCustomer(customer.id)">Delete</button>
+      <button [routerLink]="['/edit', student.id]">Edit</button>
+      <button (click)="deleteCustomer(student.id)">Delete</button>
     </td>
   </tr>
   </tbody>

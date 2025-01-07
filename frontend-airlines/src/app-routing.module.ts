@@ -1,8 +1,8 @@
 // src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerListComponent } from './customer-list/customer-list.component';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { CustomerListComponent } from './student-list/student-list.component';
+import { CustomerFormComponent } from './student-form/student-form.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerListComponent },

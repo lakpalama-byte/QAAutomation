@@ -6,8 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { CustomerListComponent } from './student-list/student-list.component';
+import { CustomerFormComponent } from './student-form/student-form.component';
 
 @NgModule({
   declarations: [
